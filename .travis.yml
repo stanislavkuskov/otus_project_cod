@@ -41,6 +41,7 @@ install:
 
   - sudo ldconfig
   - echo "OpenCV installed."
+  - cd ../../
 
 before_script:
   - ls
@@ -49,6 +50,7 @@ before_script:
   - cmake --version
 
 script:
+  - cd [project_dir]
   - cmake .
   - cmake --build .
   - cmake --build . --target package
