@@ -28,8 +28,8 @@ install:
   - cd build
 
   # Set build instructions for Ubuntu distro.
-  - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules -D BUILD_EXAMPLES=OFF ..
-
+#  - cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules -D BUILD_EXAMPLES=OFF ..
+  - cmake -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF -D BUILD_opencv_apps=OFF -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=/usr/local ..
   # Run 'make' with four threads.
   - make -j$(nproc)
 
@@ -41,6 +41,7 @@ install:
 
   - sudo ldconfig
   - echo "OpenCV installed."
+  - cd ../..
 
 script:
   - sudo cmake .
