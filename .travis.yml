@@ -41,12 +41,17 @@ install:
 
   - sudo ldconfig
   - echo "OpenCV installed."
-  - cd ../..
+
+before_script:
+  - ls
+  - gcc --version
+  - g++ --version
+  - cmake --version
 
 script:
-  - sudo cmake .
-  - sudo cmake --build .
-  - sudo cmake --build . --target package
+  - cmake .
+  - cmake --build .
+  - cmake --build . --target package
 
 deploy:
   provider: script
