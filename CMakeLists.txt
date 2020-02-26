@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.2)
 
 if($ENV{TRAVIS_BUILD_NUMBER})
     project(cod VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
