@@ -35,7 +35,6 @@ install:
   - echo "OpenCV installed."
 
 script:
-  -
   - cmake .
   - cmake --build .
   - cmake --build . --target package
