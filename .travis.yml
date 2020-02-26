@@ -33,9 +33,9 @@ install:
   - echo "OpenCV installed."
 
 script:
-  - cmake .
-  - cmake --build .
-  - cmake --build . --target package
+  - sudo cmake .
+  - sudo cmake --build .
+  - sudo cmake --build . --target package
 
 deploy:
   provider: script
