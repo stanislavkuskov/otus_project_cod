@@ -2,7 +2,13 @@ dist: xenial
 language: cpp
 compiler: clang
 
+install:
+  - sudo apt-get install libopencv-dev
+  - sudo apt-get install libboost-all-dev
+  - sudo apt-get install libeigen3-dev
+
 script:
+
   - cmake .
   - cmake --build .
   - cmake --build . --target package
