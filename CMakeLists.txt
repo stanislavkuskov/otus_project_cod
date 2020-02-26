@@ -6,9 +6,9 @@ else()
     project(cod VERSION 0.0.0)
 endif()
 
-project(cod)
+find_package(OpenCV REQUIRED)
 
-#find_package(OpenCV REQUIRED)
+configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
 add_executable(cod main.cpp)
 
@@ -18,9 +18,9 @@ set_target_properties(cod PROPERTIES
         COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
         )
 
-#target_link_libraries(cod ${OpenCV_LIBS})
-
 install(TARGETS cod RUNTIME DESTINATION bin)
+
+target_link_libraries(cod ${OpenCV_LIBS})
 
 set(CPACK_GENERATOR DEB)
 
@@ -31,3 +31,5 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT kuskov.stanislav@gmail.com)
 
 include(CPack)
+
+
