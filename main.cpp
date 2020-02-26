@@ -1,6 +1,8 @@
-#include "opencv2/core.hpp"
-#include "opencv2/highgui.hpp"
-#include "opencv2/videoio.hpp"
+//https://pydeeplearning.com/opencv/install-opencv-with-c-on-ubuntu-18-04/
+//https://gist.github.com/Randommood/478ccd806511d45febc1
+#include "opencv2/core/core.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/videoio/videoio.hpp"
 #include <iostream>
 
 using namespace cv;

@@ -18,7 +18,7 @@ set_target_properties(cod PROPERTIES
         COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
         )
 
-target_link_libraries(cod PRIVATE ${OpenCV_LIBS})
+target_link_libraries(cod ${OpenCV_LIBS})
 
 install(TARGETS cod RUNTIME DESTINATION bin)
 
