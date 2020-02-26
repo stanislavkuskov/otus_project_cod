@@ -6,7 +6,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get install g++-8 cmake doxygen graphviz -y
+  - sudo apt-get install g++-8 cmake -y
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 60
 
   # OpenCV dependencies - Details available at: http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html
