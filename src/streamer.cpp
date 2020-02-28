@@ -10,7 +10,19 @@ Streamer::Streamer(int source, FrameSize frame_size) {
     capture_.set(4, frame_size.height);
 }
 
+void Streamer::createFrame(){
+    while (capture_.isOpened()){
+        capture_ >> image_;
+        std::cout << image_.size[0];
+        imshow("Sample", image_);
+        if(cv::waitKey(10) >= 0)
+            break;
+    }
+}
+
 cv::Mat Streamer::getFrame() {
-    capture_ >> image_;
     return image_;
 }
+
+Streamer::~Streamer() = default;
+
