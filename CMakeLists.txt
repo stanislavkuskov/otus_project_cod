@@ -6,9 +6,7 @@ else()
     project(cod VERSION 0.0.0)
 endif()
 
-set(OpenCV_DIR "include/opencv")
-find_package(OpenCV REQUIRED COMPONENTS core imgproc highgui videoio)
-include_directories(${OpenCV_INCLUDE_DIRS})
+find_package(OpenCV REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
