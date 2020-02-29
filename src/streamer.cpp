@@ -13,10 +13,6 @@ Streamer::Streamer(int source, FrameSize frame_size) {
 void Streamer::createFrame(){
     while (capture_.isOpened()){
         capture_ >> image_;
-        std::cout << image_.size[0];
-        imshow("Sample", image_);
-        if(cv::waitKey(10) >= 0)
-            break;
     }
 }
 
