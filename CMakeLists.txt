@@ -10,7 +10,10 @@ find_package(OpenCV REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
-add_executable(cod main.cpp src/streamer.cpp src/streamer.h)
+add_executable(cod main.cpp src/streamer.cpp src/streamer.h src/detector.cpp src/detector.h)
+
+target_link_libraries(cod dlib)
+target_link_libraries(cod openblas)
 
 set_target_properties(cod PROPERTIES
         CXX_STANDARD 17
