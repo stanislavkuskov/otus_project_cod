@@ -20,6 +20,7 @@ set_target_properties(cod PROPERTIES
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
         )
+SET(CMAKE_CXX_FLAGS -pthread)
 
 install(TARGETS cod RUNTIME DESTINATION bin)
 

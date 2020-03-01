@@ -7,6 +7,8 @@ before_install:
   - sudo apt-get update -qq
 
 install:
+  #  install dlib
+  - sudo apt-get update
   - sudo apt-get install libopenblas-dev
   - sudo apt-get install libdlib-dev
 

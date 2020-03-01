@@ -3,6 +3,7 @@
 //
 
 #include "detector.h"
+
 //https://github.com/spmallick/learnopencv/blob/master/FaceDetectionComparison/face_detection_dlib_hog.cpp
 void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
                                  int inWidth) {
@@ -30,7 +31,17 @@ void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
         int y1 = (int)(faceRect.top() * scaleHeight);
         int x2 = (int)(faceRect.right() * scaleWidth);
         int y2 = (int)(faceRect.bottom() * scaleHeight);
-        cv::rectangle(frameDlibHog, Point(x1, y1), Point(x2, y2), Scalar(0,255,0), (int)(frameHeight/150.0), 4);
+        cv::rectangle(frameDlibHog, cv::Point(x1, y1), cv::Point(x2, y2), cv::Scalar(0,255,0), (int)(frameHeight/150.0), 4);
+        DetectedObject detected_obj;
+        detected_obj.x1 = x1;
+        detected_obj.y1 = y1;
+        detected_obj.x2 = x2;
+        detected_obj.y2 = y2;
+//        TODO добавление обьектов не должно прерываться
+        detected_objs_.push_back(detected_obj);
     }
 }
 
+std::vector<DetectedObject> Detector::getDetects() {
+    return detected_objs_;
+}

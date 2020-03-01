@@ -10,7 +10,20 @@ Streamer::Streamer(int source, FrameSize frame_size) {
     capture_.set(4, frame_size.height);
 }
 
+void Streamer::createFrame(){
+    cv::Mat frame;
+    while (capture_.isOpened()){
+        cout_mutex_.lock();
+        capture_ >> frame;
+//        process frame functions
+        image_ = std::move(frame);
+        cout_mutex_.unlock();
+    }
+}
+
 cv::Mat Streamer::getFrame() {
-    capture_ >> image_;
     return image_;
 }
+
+Streamer::~Streamer() = default;
+
