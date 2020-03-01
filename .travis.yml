@@ -10,7 +10,7 @@ install:
   #  install dlib
   - sudo apt-get update
   - sudo apt-get install libopenblas-dev
-  - sudo apt-get install libdlib-dev=19.10-3
+  - sudo apt-get install libdlib-dev
 
   - sudo apt-get install g++-8 cmake -y
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 60
