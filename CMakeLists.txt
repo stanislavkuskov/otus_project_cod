@@ -6,7 +6,6 @@ else()
     project(cod VERSION 0.0.0)
 endif()
 
-SET("OpenCV_DIR" "include/cv2.so")
 find_package(OpenCV REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
@@ -15,8 +14,6 @@ add_executable(cod main.cpp src/streamer.cpp src/streamer.h src/detector.cpp src
 
 target_link_libraries(cod dlib)
 target_link_libraries(cod openblas)
-
-target_link_libraries(cod ${OpenCV_LIBS})
 
 set_target_properties(cod PROPERTIES
         CXX_STANDARD 17
@@ -28,7 +25,6 @@ SET(CMAKE_CXX_FLAGS -pthread)
 install(TARGETS cod RUNTIME DESTINATION bin)
 
 target_link_libraries(cod ${OpenCV_LIBS})
-message(${OpenCV_LIBS})
 
 set(CPACK_GENERATOR DEB)
 
