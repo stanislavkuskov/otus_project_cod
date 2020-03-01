@@ -30,6 +30,7 @@ public:
 private:
     cv::VideoCapture capture_;
     cv::Mat image_;
+    std::mutex cout_mutex_;
 };
 
 #endif //COD_STREAMER_H

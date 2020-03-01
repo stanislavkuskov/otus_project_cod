@@ -11,8 +11,13 @@ Streamer::Streamer(int source, FrameSize frame_size) {
 }
 
 void Streamer::createFrame(){
+    cv::Mat frame;
     while (capture_.isOpened()){
-        capture_ >> image_;
+        cout_mutex_.lock();
+        capture_ >> frame;
+//        process frame functions
+        image_ = std::move(frame);
+        cout_mutex_.unlock();
     }
 }
 

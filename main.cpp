@@ -1,8 +1,9 @@
 //https://pydeeplearning.com/opencv/install-opencv-with-c-on-ubuntu-18-04/
 //https://gist.github.com/Randommood/478ccd806511d45febc1
 
-#include <iostream>
+
 #include "src/streamer.h"
+#include "src/detector.h"
 
 
 int main()
@@ -13,10 +14,13 @@ int main()
     auto * streamer = new Streamer(0, frame_size);
     std::thread (&Streamer::createFrame, streamer).detach();
 
+    Detector detector;
+
     while (true){
 
         frame = streamer->getFrame();
         if (!frame.empty()){
+            detector.detectFaceDlibHog(frame);
             imshow("Sample2", frame);
         }
         if(cv::waitKey(10) >= 0)
