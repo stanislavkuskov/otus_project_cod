@@ -4,24 +4,35 @@
 
 #include "src/streamer.h"
 #include "src/detector.h"
+#include "src/visualizer.h"
 
 int main()
 {
     FrameSize frame_size;
     cv::Mat frame;
+    cv::Mat drawed;
     auto * streamer = new Streamer(0, frame_size);
-    std::thread (&Streamer::createFrame, streamer).detach();
+    std::thread (&Streamer::createFrame, std::ref(streamer)).detach();
 
     Detector detector;
+    Visualizer visualizer;
 
     while (true){
         frame = streamer->getFrame();
-        if(frame.empty()){
-            break;
-        }
+        drawed = frame.clone();
+
         if (!frame.empty()){
             detector.detectFaceDlibHog(frame);
-            imshow("Sample", frame);
+            std::vector<DetectedObject> detects = detector.getDetects();
+
+            visualizer.drawDetects(drawed, detects);
+            cv::Mat vis_frame = visualizer.getFrame();
+
+            cv::imshow("Sample1", vis_frame);
+        }
+
+        if(frame.empty()){
+            break;
         }
         if(cv::waitKey(10) >= 0)
             break;
