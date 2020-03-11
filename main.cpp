@@ -11,7 +11,7 @@ int main()
     FrameSize frame_size;
     cv::Mat frame;
     cv::Mat drawed;
-    auto * streamer = new Streamer(0, frame_size);
+    auto * streamer = new Streamer(2, frame_size);
     std::thread (&Streamer::createFrame, std::ref(streamer)).detach();
 
     Detector detector;

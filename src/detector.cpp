@@ -8,6 +8,7 @@
 void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
                                  int inWidth) {
 
+    std::vector<DetectedObject> detected_objs;
     int frameHeight = frameDlibHog.rows;
     int frameWidth = frameDlibHog.cols;
     if (!inWidth)
@@ -31,17 +32,25 @@ void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
         int y1 = (int)(faceRect.top() * scaleHeight);
         int x2 = (int)(faceRect.right() * scaleWidth);
         int y2 = (int)(faceRect.bottom() * scaleHeight);
-        cv::rectangle(frameDlibHog, cv::Point(x1, y1), cv::Point(x2, y2), cv::Scalar(0,255,0), (int)(frameHeight/150.0), 4);
         DetectedObject detected_obj;
         detected_obj.x1 = x1;
         detected_obj.y1 = y1;
         detected_obj.x2 = x2;
         detected_obj.y2 = y2;
 //        TODO добавление обьектов не должно прерываться
-        detected_objs_.push_back(detected_obj);
+        detected_objs.push_back(detected_obj);
     }
+//    TODO make as atomic operation
+    cout_mutex.lock();
+    detected_objs_ = detected_objs;
+    frame_ = frameDlibHog;
+    cout_mutex.unlock();
 }
 
 std::vector<DetectedObject> Detector::getDetects() {
     return detected_objs_;
+}
+
+cv::Mat Detector::getFrame(){
+    return frame_;
 }

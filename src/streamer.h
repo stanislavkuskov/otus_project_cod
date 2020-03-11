@@ -5,20 +5,7 @@
 #ifndef COD_STREAMER_H
 #define COD_STREAMER_H
 
-#include "opencv2/core/core.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/videoio/videoio.hpp"
-
-#include <utility>
-#include <thread>
-#include <mutex>
-#include <iostream>
-
-struct FrameSize{
-    FrameSize():width(640), height(480){};
-    double width;
-    double height;
-};
+#include "multiheaders.h"
 
 class Streamer{
 public:
