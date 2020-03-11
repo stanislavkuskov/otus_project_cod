@@ -2,8 +2,9 @@
 //https://gist.github.com/Randommood/478ccd806511d45febc1
 
 
-#include "src/streamer.h"
 #include "src/detector.h"
+#include "src/streamer.h"
+#include "src/publisher.h"
 #include "src/visualizer.h"
 
 int main()
@@ -13,6 +14,9 @@ int main()
     cv::Mat drawed;
     auto * streamer = new Streamer(2, frame_size);
     std::thread (&Streamer::createFrame, std::ref(streamer)).detach();
+
+    auto * publisher = new Publisher();
+    std::thread (&Publisher::transmitDetect, std::ref(publisher)).detach();
 
     Detector detector;
     Visualizer visualizer;
@@ -38,5 +42,6 @@ int main()
             break;
     }
     delete streamer;
+    delete publisher;
     return 0;
 }

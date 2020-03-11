@@ -10,7 +10,19 @@ find_package(OpenCV REQUIRED)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
-add_executable(cod main.cpp src/streamer.cpp src/streamer.h src/detector.cpp src/detector.h src/visualizer.cpp src/visualizer.h src/multiheaders.h)
+add_executable(
+        cod
+        main.cpp
+        src/streamer.cpp
+        src/streamer.h
+        src/detector.cpp
+        src/detector.h
+        src/visualizer.cpp
+        src/visualizer.h
+        src/multiheaders.h
+        src/publisher.cpp
+        src/publisher.h
+        )
 
 target_link_libraries(cod dlib)
 target_link_libraries(cod openblas)
