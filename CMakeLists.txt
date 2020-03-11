@@ -7,6 +7,7 @@ else()
 endif()
 
 find_package(OpenCV REQUIRED)
+find_package(cppzmq)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 
@@ -26,6 +27,7 @@ add_executable(
 
 target_link_libraries(cod dlib)
 target_link_libraries(cod openblas)
+target_link_libraries(cod cppzmq)
 
 set_target_properties(cod PROPERTIES
         CXX_STANDARD 17
