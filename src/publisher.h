@@ -15,7 +15,11 @@ public:
     void transmitDetect();
 
 private:
+
+    static std::string convertToJson(const std::vector<DetectedObject>& detected_objs);
+
     std::string topic_ = "cod";
+    std::string msg_data_ = "";
     std::vector<DetectedObject> detected_objs_;
 
     zmq::context_t context_;
