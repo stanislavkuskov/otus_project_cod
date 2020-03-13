@@ -1,4 +1,4 @@
-dist: xenial
+dist: bionic
 language: cpp
 compiler: clang
 
@@ -7,6 +7,10 @@ before_install:
   - sudo apt-get update -qq
 
 install:
+  # install zeromq
+  - sudo apt-get update
+  - sudo apt-get install libzmq-dev
+
   #  install dlib
   - sudo apt-get update
   - sudo apt-get install libopenblas-dev
