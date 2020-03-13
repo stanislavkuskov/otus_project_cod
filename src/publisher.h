@@ -20,6 +20,7 @@ private:
 
     zmq::context_t context_;
     zmq::socket_t pub_;
+    std::mutex cout_mutex_;
 
 };
 

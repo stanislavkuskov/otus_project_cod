@@ -37,14 +37,14 @@ void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
         detected_obj.y1 = y1;
         detected_obj.x2 = x2;
         detected_obj.y2 = y2;
-//        TODO добавление обьектов не должно прерываться
+
         detected_objs.push_back(detected_obj);
     }
 //    TODO make as atomic operation
-    cout_mutex.lock();
+    cout_mutex_.lock();
     detected_objs_ = detected_objs;
     frame_ = frameDlibHog;
-    cout_mutex.unlock();
+    cout_mutex_.unlock();
 }
 
 std::vector<DetectedObject> Detector::getDetects() {

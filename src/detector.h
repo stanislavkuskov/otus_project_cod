@@ -14,11 +14,10 @@ public:
     cv::Mat getFrame();
 
 private:
-    std::mutex cout_mutex;
-
     dlib::frontal_face_detector hogFaceDetector = dlib::get_frontal_face_detector();
     std::vector<DetectedObject> detected_objs_;
     cv::Mat frame_;
+    std::mutex cout_mutex_;
 };
 
 
