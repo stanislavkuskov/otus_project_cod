@@ -62,4 +62,3 @@ if __name__ == '__main__':
             # Чтобы отображать список детектируемых объектов раскомментируйте следующую строку
             # print("w:{}, h:{}".format(detect_dict["objects"]["w"], detect_dict["objects"]["h"]))
             print(detect_dict)
-            print(type(detect_dict[0]['y2']))

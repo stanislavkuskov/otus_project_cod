@@ -43,13 +43,16 @@ std::string Publisher::convertToJson(const std::vector<DetectedObject>& detected
     if (!detected_objs.empty()){
         for (const DetectedObject& detected_object: detected_objs){
             msg_data +=
-                R"({)"
+                R"([{)"
                     R"("object_class":")" + detected_object.object_class + R"(",)"
                     R"("x1":")" + std::to_string(detected_object.x1) + R"(",)"
                     R"("x2":")" + std::to_string(detected_object.x2) + R"(",)"
                     R"("y1":")" + std::to_string(detected_object.y1) + R"(",)"
                     R"("y2":")" + std::to_string(detected_object.y2) + R"(")"
-                R"(})";
+                R"(}])";
+                if (&detected_object != &detected_objs.back()){
+                    msg_data += R"(,)";
+                }
         }
     }
     msg_data += R"(])";
