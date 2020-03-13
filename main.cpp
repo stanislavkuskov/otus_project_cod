@@ -12,6 +12,7 @@ int main()
     FrameSize frame_size;
     cv::Mat frame;
     cv::Mat drawed;
+
     auto * streamer = new Streamer(2, frame_size);
     std::thread (&Streamer::createFrame, std::ref(streamer)).detach();
 
@@ -30,6 +31,7 @@ int main()
             std::vector<DetectedObject> detects = detector.getDetects();
 
             visualizer.drawDetects(drawed, detects);
+            publisher->setDetect(detects);
             cv::Mat vis_frame = visualizer.getFrame();
 
             cv::imshow("Sample1", vis_frame);
