@@ -9,10 +9,15 @@ before_install:
 install:
   # install zeromq
   - sudo apt-get update
-  - sudo apt-get install libzmq-dev
+  - git clone https://github.com/zeromq/libzmq.git
+  - cd libzmq
+  - mkdir build
+  - cd build
+  - cmake ..
+  - sudo make -j4 install
+  - cd ../../
 
   #  install dlib
-  - sudo apt-get update
   - sudo apt-get install libopenblas-dev
   - sudo apt-get install libdlib-dev
 
