@@ -1,6 +1,7 @@
 //https://pydeeplearning.com/opencv/install-opencv-with-c-on-ubuntu-18-04/
 //https://gist.github.com/Randommood/478ccd806511d45febc1
 
+#include <thread>
 
 #include "src/detector.h"
 #include "src/streamer.h"
