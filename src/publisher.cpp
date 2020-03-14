@@ -1,6 +1,8 @@
 //
 // Created by kuskov on 11.03.2020.
 //
+#include <thread>
+#include <chrono>
 #include "publisher.h"
 
 Publisher::Publisher(): context_(1), pub_(context_, ZMQ_PUB) {
