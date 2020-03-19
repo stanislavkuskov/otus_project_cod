@@ -30,11 +30,12 @@ int main()
         if (!frame.empty()){
             detector.detectFaceDlibHog(frame);
             std::vector<DetectedObject> detects = detector.getDetects();
+            cv::Mat detector_img = detector.getFrame();
 
-            visualizer.drawDetects(drawed, detects);
+            visualizer.drawDetects(drawed, detector_img);
             publisher->setDetect(detects);
-            cv::Mat vis_frame = visualizer.getFrame();
 
+            cv::Mat vis_frame = visualizer.getFrame();
             cv::imshow("Sample1", vis_frame);
         }
 

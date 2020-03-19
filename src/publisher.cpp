@@ -17,16 +17,16 @@ void Publisher::setDetect(std::vector<DetectedObject> detected_objs) {
 }
 
 void Publisher::transmitDetect() {
-    std::string data_text = "Text";
+
     while (true){
 
         cout_mutex_.lock();
-
         std::string msg_data = convertToJson(detected_objs_);
+        cout_mutex_.unlock();
+
         zmq_send(pub_, topic_.data(), topic_.size(), ZMQ_SNDMORE);
         zmq_send(pub_, msg_data.data(), msg_data.size(), 0);
 
-        cout_mutex_.unlock();
 
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
