@@ -45,6 +45,7 @@ int main()
         if(cv::waitKey(10) >= 0)
             break;
     }
+    // TODO предлагаю сделать штатное завершение потока
     delete streamer;
     delete publisher;
     return 0;
