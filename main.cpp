@@ -25,7 +25,7 @@ int main()
     Detector detector;
     Visualizer visualizer;
 
-    while (true){
+    while (true){ // Лучше добавить некое условие на выход. Будет полезно когда код будет запускаться в виде сервиса.
         frame = streamer->getFrame();
         drawed = frame.clone();
 
