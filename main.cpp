@@ -14,16 +14,18 @@ int main()
     cv::Mat frame;
     cv::Mat drawed;
 
-    auto * streamer = new Streamer(2, frame_size);
-    std::thread (&Streamer::createFrame, std::ref(streamer)).detach();
+    auto * streamer = new Streamer(2, frame_size); // Лучше использовать умные указатели, например unique_ptr
+    std::thread (&Streamer::createFrame, std::ref(streamer)).detach(); // Довольно опасно так делать, в данном случае лучше
+                                                                       // созадть именовыный поток std::thread th_stream()
+                                                                       // в конец программы подождать завершения методом join
 
-    auto * publisher = new Publisher();
-    std::thread (&Publisher::transmitDetect, std::ref(publisher)).detach();
+    auto * publisher = new Publisher(); // Умные указатели
+    std::thread (&Publisher::transmitDetect, std::ref(publisher)).detach(); // Тоже самое с этим потоком
 
     Detector detector;
     Visualizer visualizer;
 
-    while (true){
+    while (true){ // Лучше добавить некое условие на выход. Будет полезно когда код будет запускаться в виде сервиса.
         frame = streamer->getFrame();
         drawed = frame.clone();
 
@@ -45,7 +47,7 @@ int main()
         if(cv::waitKey(10) >= 0)
             break;
     }
-    delete streamer;
-    delete publisher;
+    delete streamer; // Умные указатели
+    delete publisher; // Умные указаели
     return 0;
 }
