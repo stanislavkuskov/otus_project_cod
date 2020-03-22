@@ -10,15 +10,15 @@ Publisher::Publisher(): context_(1), pub_(context_, ZMQ_PUB) {
     printf("Starting server...\n");
 }
 
-void Publisher::setDetect(std::vector<DetectedObject> detected_objs) {
+void Publisher::setDetect(const std::vector<DetectedObject> &detected_objs) {
     cout_mutex_.lock();
-    detected_objs_ = std::move(detected_objs);
+    detected_objs_ = detected_objs;
     cout_mutex_.unlock();
 }
 
 void Publisher::transmitDetect() {
 
-    while (true){
+    while (!is_stopped_){
 
         cout_mutex_.lock();
         std::string msg_data = convertToJson(detected_objs_);
@@ -26,7 +26,6 @@ void Publisher::transmitDetect() {
 
         zmq_send(pub_, topic_.data(), topic_.size(), ZMQ_SNDMORE);
         zmq_send(pub_, msg_data.data(), msg_data.size(), 0);
-
 
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
@@ -55,4 +54,8 @@ std::string Publisher::convertToJson(const std::vector<DetectedObject>& detected
     msg_data += R"(])";
 
     return msg_data;
+}
+
+void Publisher::stop() {
+    is_stopped_ = true;
 }

@@ -14,37 +14,46 @@ int main()
     cv::Mat frame;
     cv::Mat drawed;
 
-    auto * streamer = new Streamer(2, frame_size);
-    std::thread (&Streamer::createFrame, std::ref(streamer)).detach();
+    auto * streamer = new Streamer(0, frame_size);
+    std::thread streamer_thread(&Streamer::createFrame, std::ref(streamer));
 
     auto * publisher = new Publisher();
-    std::thread (&Publisher::transmitDetect, std::ref(publisher)).detach();
+    std::thread publisher_thread(&Publisher::transmitDetect, std::ref(publisher));
 
     Detector detector;
     Visualizer visualizer;
 
     while (true){
         frame = streamer->getFrame();
-        drawed = frame.clone();
 
         if (!frame.empty()){
             detector.detectFaceDlibHog(frame);
             std::vector<DetectedObject> detects = detector.getDetects();
             cv::Mat detector_img = detector.getFrame();
 
-            visualizer.drawDetects(drawed, detector_img);
-            publisher->setDetect(detects);
+            cv::Mat detector_current_frame = detector.getFrame();
+            visualizer.drawDetects(detector_current_frame, detects);
 
             cv::Mat vis_frame = visualizer.getFrame();
             cv::imshow("Sample1", vis_frame);
+
+            publisher->setDetect(detects);
         }
+
 
         if(frame.empty()){
             break;
         }
-        if(cv::waitKey(10) >= 0)
+        if(cv::waitKey(10) >= 0){
+            streamer->stop();
+            publisher->stop();
             break;
+        }
+
     }
+
+    streamer_thread.join();
+    publisher_thread.join();
     delete streamer;
     delete publisher;
     return 0;

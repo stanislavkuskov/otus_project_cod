@@ -33,4 +33,11 @@ struct FrameSize{
     double height;
 };
 
+
+struct Detected_image{
+    cv::Mat image;
+    DetectedObject detects;
+};
+
+
 #endif //COD_MULTIHEADERS_H
