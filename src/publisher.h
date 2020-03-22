@@ -11,8 +11,9 @@
 class Publisher {
 public:
     Publisher();
-    void setDetect(std::vector<DetectedObject> detected_objs);
+    void setDetect(const std::vector<DetectedObject> &detected_objs);
     void transmitDetect();
+    void stop();
 
 private:
 
@@ -25,6 +26,8 @@ private:
     zmq::context_t context_;
     zmq::socket_t pub_;
     std::mutex cout_mutex_;
+
+    bool is_stopped_ = false;
 
 };
 

@@ -12,17 +12,23 @@ Streamer::Streamer(int source, FrameSize frame_size) {
 
 void Streamer::createFrame(){
     cv::Mat frame;
-    while (capture_.isOpened()){
-        cout_mutex_.lock();
+    while (!is_stopped_){
         capture_ >> frame;
-//        process frame functions
+
+        cout_mutex_.lock();
         image_ = std::move(frame);
         cout_mutex_.unlock();
+
+        if (!capture_.isOpened()) break;
     }
 }
 
 cv::Mat Streamer::getFrame() {
     return image_;
+}
+
+void Streamer::stop(){
+    is_stopped_ = true;
 }
 
 Streamer::~Streamer() = default;
