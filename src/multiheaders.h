@@ -34,9 +34,9 @@ struct FrameSize{
 };
 
 
-struct Detected_image{
+struct DetectedFrame{
     cv::Mat image;
-    DetectedObject detects;
+    std::vector<DetectedObject> detects;
 };
 
 

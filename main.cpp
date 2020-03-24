@@ -23,21 +23,22 @@ int main()
     Detector detector;
     Visualizer visualizer;
 
+    DetectedFrame detected_frame;
+
     while (true){
         frame = streamer->getFrame();
 
         if (!frame.empty()){
             detector.detectFaceDlibHog(frame);
-            std::vector<DetectedObject> detects = detector.getDetects();
-            cv::Mat detector_img = detector.getFrame();
 
-            cv::Mat detector_current_frame = detector.getFrame();
-            visualizer.drawDetects(detector_current_frame, detects);
+            detected_frame = detector.getDetectedFrame();
+
+            visualizer.drawDetects(detected_frame.image, detected_frame.detects);
 
             cv::Mat vis_frame = visualizer.getFrame();
             cv::imshow("Sample1", vis_frame);
 
-            publisher->setDetect(detects);
+            publisher->setDetect(detected_frame.detects);
         }
 
 

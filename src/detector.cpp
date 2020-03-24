@@ -40,17 +40,14 @@ void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
 
         detected_objs.push_back(detected_obj);
     }
-//    TODO make as atomic operation
-    cout_mutex_.lock();
-    detected_objs_ = detected_objs;
-    frame_ = frameDlibHog;
-    cout_mutex_.unlock();
+
+    DetectedFrame detected_frame;
+    detected_frame.image = frameDlibHog;
+    detected_frame.detects = detected_objs;
+
+    detected_image_q_.push(detected_frame);
 }
 
-std::vector<DetectedObject> Detector::getDetects() {
-    return detected_objs_;
-}
-
-cv::Mat Detector::getFrame(){
-    return frame_;
+DetectedFrame Detector::getDetectedFrame(){
+    return detected_image_q_.top();
 }

@@ -6,18 +6,16 @@
 #define COD_DETECTOR_H
 
 #include "multiheaders.h"
+#include <queue>
 
 class Detector {
 public:
     void detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight=300, int inWidth=0);
-    std::vector<DetectedObject> getDetects();
-    cv::Mat getFrame();
+    DetectedFrame getDetectedFrame();
 
 private:
     dlib::frontal_face_detector hogFaceDetector = dlib::get_frontal_face_detector();
-    std::vector<DetectedObject> detected_objs_;
-    cv::Mat frame_;
-    std::mutex cout_mutex_;
+    std::priority_queue<DetectedFrame> detected_image_q_;
 };
 
 
