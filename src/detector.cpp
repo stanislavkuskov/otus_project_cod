@@ -49,5 +49,5 @@ void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
 }
 
 DetectedFrame Detector::getDetectedFrame(){
-    return detected_image_q_.top();
+    return detected_image_q_.back();
 }

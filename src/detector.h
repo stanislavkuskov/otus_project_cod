@@ -15,7 +15,7 @@ public:
 
 private:
     dlib::frontal_face_detector hogFaceDetector = dlib::get_frontal_face_detector();
-    std::priority_queue<DetectedFrame> detected_image_q_;
+    std::queue<DetectedFrame> detected_image_q_;
 };
 
 
