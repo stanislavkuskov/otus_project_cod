@@ -44,8 +44,12 @@ void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
     DetectedFrame detected_frame;
     detected_frame.image = frameDlibHog;
     detected_frame.detects = detected_objs;
-
+    if ((detected_image_q_.size() > q_size_) and (!detected_image_q_.empty())){
+        detected_image_q_.pop();
+    }
+    std::cout << detected_image_q_.size() << std::endl;
     detected_image_q_.push(detected_frame);
+
 }
 
 DetectedFrame Detector::getDetectedFrame(){
