@@ -20,7 +20,7 @@ private:
     cv::Mat image_;
     std::mutex cout_mutex_;
 
-    bool is_stopped_ = false;
+    long long is_stopped_ = false;
 };
 
 #endif //COD_STREAMER_H

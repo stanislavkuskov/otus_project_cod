@@ -14,11 +14,11 @@ int main()
     cv::Mat frame;
     cv::Mat drawed;
 
-    auto * streamer = new Streamer(0, frame_size);
-    std::thread streamer_thread(&Streamer::createFrame, std::ref(streamer));
+    auto streamer = std::make_unique<Streamer>(0, frame_size);
+    std::thread streamer_thread(&Streamer::createFrame, streamer.get());
 
-    auto * publisher = new Publisher();
-    std::thread publisher_thread(&Publisher::transmitDetect, std::ref(publisher));
+    auto publisher = std::make_unique<Publisher>();
+    std::thread publisher_thread(&Publisher::transmitDetect, publisher.get());
 
     Detector detector;
     Visualizer visualizer;
@@ -43,6 +43,8 @@ int main()
 
 
         if(frame.empty()){
+            streamer->stop();
+            publisher->stop();
             break;
         }
         if(cv::waitKey(10) >= 0){
@@ -55,7 +57,5 @@ int main()
 
     streamer_thread.join();
     publisher_thread.join();
-    delete streamer;
-    delete publisher;
     return 0;
 }
