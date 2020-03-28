@@ -7,7 +7,7 @@
 //https://github.com/spmallick/learnopencv/blob/master/FaceDetectionComparison/face_detection_dlib_hog.cpp
 void Detector::detectFaceDlibHog(cv::Mat &frameDlibHog, int inHeight,
                                  int inWidth) {
-
+    //Method stub - dlib face detector
     std::vector<DetectedObject> detected_objs;
     int frameHeight = frameDlibHog.rows;
     int frameWidth = frameDlibHog.cols;
